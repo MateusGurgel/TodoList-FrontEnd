@@ -1,37 +1,60 @@
 .header {
   padding: 1em;
-  background: white;
-  font-size: 30px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.19) ;
+  overflow: hidden;
+  background: white;
   font-family: 'Inter', sans-serif;
-
   font-family: 'Montserrat', sans-serif;
 }
 
-.title{
-  margin: 1.5em auto;
-  width: 50%;
-  padding: 10px;
+.header a.logo {
+  font-size: 38px;
+  font-weight: bold;
+  background-color: none;
+}
+
+.header a {
+  float: rigth;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  font-size: 20px; 
+  border-radius: 4px;
+  padding: 12px;
+  
+}
+
+.header a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.header_right {
+  padding: 12px;
+  float: right;
+}
+
+
+.banner{
   font-size: 60px;
+  height: 630px;
+  width: 100%;
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url("../public/BackGround.jpg") no-repeat center;
   font-family: 'Montserrat', sans-serif;
+  text-align: center;
+  color: white;
+  line-height: 560px;
 }
 
 .content{
+  width: 100%;
   margin: 1.5em auto;
-  width: 65%;
   padding: 20px;
-  background: white;
-  border-radius: 8px
-}
-
-.centerButton {
-
-}
-
-.center{
-  margin: auto;
+  border-radius: 8px;
+  font-size: 15px;
   text-align: center;
 }
+
 
 @media (prefers-color-scheme: dark) {
 }
