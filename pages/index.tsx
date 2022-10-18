@@ -1,10 +1,16 @@
 
 import type { NextPage } from 'next'
-import { Container, Row, Placeholder, Card, Col, Button } from 'react-bootstrap'
+import { Container, Row, Col, Button  } from 'react-bootstrap'
 import styles from '../styles/Home.module.css'
 import Typewriter from 'typewriter-effect';
+import { useState } from 'react';
+import RegisterModal from '../components/registerModal'
+
 
 const Home: NextPage = () => {
+
+  const [registerModalShow, setRegisterModalShow] = useState(false);
+  
 
   return (
     <div>
@@ -14,8 +20,8 @@ const Home: NextPage = () => {
 
         <div className={styles.header_right}>
 
-          <a href="\login" className={styles.rigthSideContent} >Login</a> 
-          <a href="\register" className={styles.rigthSideContent} >register</a> 
+          <a className={styles.rigthSideContent} >Login</a> 
+          <a onClick={() => setRegisterModalShow(true)} className={styles.rigthSideContent} >register</a> 
           
         </div>
 
@@ -37,6 +43,12 @@ const Home: NextPage = () => {
             }}/>
         </div>
 
+        
+      <RegisterModal
+        show={registerModalShow}
+        onHide={() => setRegisterModalShow(false)}
+      />
+
       <Container className={styles.content}>
 
         <Row>
@@ -52,7 +64,7 @@ const Home: NextPage = () => {
           <Col>
             <h1>Easy to use!</h1>
             <p>You literally have to press just 2 buttons</p>
-            <Button>Let's get started</Button>
+            <Button onClick={() => setRegisterModalShow(true)}>Let's get started</Button>
           </Col>
         </Row>
 
