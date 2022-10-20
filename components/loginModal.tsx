@@ -2,7 +2,8 @@ import axios from 'axios';
 import { FormEvent, useState } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap'
 
-function RegisterModal (props : any){
+function LoginModal (props : any){
+
   const [validated, setValidated] = useState(false);
 
   const handleSubmit = async (event : FormEvent) => {
@@ -15,12 +16,11 @@ function RegisterModal (props : any){
     const data = Object.fromEntries(formData)
 
     try{
-      const post = await axios.post("http://127.0.0.1:3333/users/", {
-        "username": data.username,
+      const post = await axios.post("http://127.0.0.1:3333/login/", {
         "email": data.email,
         "password": data.password,
       })
-      alert('Account Created with Success!')
+      alert('Login Success!')
     }catch (err) {
       console.error(err)
       alert("Connection error")
@@ -36,7 +36,7 @@ function RegisterModal (props : any){
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Register now
+            Login
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -51,15 +51,6 @@ function RegisterModal (props : any){
                 placeholder="email@example.com" />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="username">
-              <Form.Label>Username</Form.Label>
-              <Form.Control 
-              required
-              name='username'
-              type="text"
-              placeholder="Username" />
-            </Form.Group>
-
             <Form.Group className="mb-3" controlId="password">
               <Form.Label>Password</Form.Label>
               <Form.Control
@@ -70,7 +61,7 @@ function RegisterModal (props : any){
                 placeholder="Password (Minimum 8 characters)" />
             </Form.Group>
 
-              <Button type="submit">Register</Button>
+            <Button type="submit">Login</Button>
 
           </Form>
         </Modal.Body>
@@ -78,4 +69,4 @@ function RegisterModal (props : any){
     );
   }
 
-  export default RegisterModal
+  export default LoginModal
