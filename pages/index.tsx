@@ -5,11 +5,13 @@ import styles from '../styles/Home.module.css'
 import Typewriter from 'typewriter-effect';
 import { useState } from 'react';
 import RegisterModal from '../components/registerModal'
+import LoginModal from '../components/loginModal'
 
 
 const Home: NextPage = () => {
 
   const [registerModalShow, setRegisterModalShow] = useState(false);
+  const [loginModalShow, setLoginModalShow] = useState(false);
   
 
   return (
@@ -20,7 +22,7 @@ const Home: NextPage = () => {
 
         <div className={styles.header_right}>
 
-          <a className={styles.rigthSideContent} >Login</a> 
+          <a onClick={() => setLoginModalShow(true)} className={styles.rigthSideContent} >Login</a> 
           <a onClick={() => setRegisterModalShow(true)} className={styles.rigthSideContent} >register</a> 
           
         </div>
@@ -47,6 +49,10 @@ const Home: NextPage = () => {
       <RegisterModal
         show={registerModalShow}
         onHide={() => setRegisterModalShow(false)}
+      />
+      <LoginModal
+        show={loginModalShow}
+        onHide={() => setLoginModalShow(false)}
       />
 
       <Container className={styles.content}>
