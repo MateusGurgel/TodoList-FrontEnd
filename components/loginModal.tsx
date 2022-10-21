@@ -22,7 +22,8 @@ function LoginModal (props : any){
 
     }).then((response)=>{
       console.log(response)
-
+      localStorage.setItem('bearer', response.data.token)
+      document.location.href="dashboard";
     }).catch(function (error) {
       if (error.response) {
         alert(error.response.data.message);
