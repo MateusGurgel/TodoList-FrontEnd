@@ -14,17 +14,32 @@ function RegisterModal (props : any){
     const formData = new FormData(event.target as HTMLFormElement)
     const data = Object.fromEntries(formData)
 
-    try{
-      const post = await axios.post("http://127.0.0.1:3333/users/", {
-        "username": data.username,
-        "email": data.email,
-        "password": data.password,
-      })
-      alert('Account Created with Success!')
-    }catch (err) {
-      console.error(err)
-      alert("Connection error")
-    }
+    
+    const post = await axios.post("http://127.0.0.1:3333/users/", {
+
+      "username": data.username,
+      "email": data.email,
+      "password": data.password,
+    }).then(()=>{
+
+      alert("your account has been successfully created!")
+    }).catch(function (error) {
+      if (error.response) {
+
+        alert(error.response.data.errors[0].field + ' ' + error.response.data.errors[0].message);
+      } else if (error.request) {
+
+        alert("Conection Error")
+        console.log(error.request);
+      } else {
+        
+        console.log('Error', error.message);
+      }
+      console.log(error.config);
+    })
+
+    
+
   };
 
     return (
@@ -69,7 +84,7 @@ function RegisterModal (props : any){
                 pattern="().{8,}"
                 placeholder="Password (Minimum 8 characters)" />
             </Form.Group>
-
+            
               <Button type="submit">Register</Button>
 
           </Form>

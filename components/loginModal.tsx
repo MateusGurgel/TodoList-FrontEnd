@@ -1,3 +1,4 @@
+import { AsyncLocalStorage } from 'async_hooks';
 import axios from 'axios';
 import { FormEvent, useState } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap'
@@ -15,16 +16,28 @@ function LoginModal (props : any){
     const formData = new FormData(event.target as HTMLFormElement)
     const data = Object.fromEntries(formData)
 
-    try{
-      const post = await axios.post("http://127.0.0.1:3333/login/", {
-        "email": data.email,
-        "password": data.password,
-      })
-      alert('Login Success!')
-    }catch (err) {
-      console.error(err)
-      alert("Connection error")
-    }
+    const post = await axios.post("http://127.0.0.1:3333/login/", {
+      "email": data.email,
+      "password": data.password,
+
+    }).then((response)=>{
+      console.log(response)
+
+    }).catch(function (error) {
+      if (error.response) {
+        alert(error.response.data.message);
+
+      } else if (error.request) {
+        alert("Conection Error")
+        console.log(error.request);
+
+      } else {
+        console.log('Error', error.message);
+
+      }
+      console.log(error.config);
+
+    })
   };
 
     return (
