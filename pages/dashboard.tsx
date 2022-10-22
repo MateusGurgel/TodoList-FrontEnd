@@ -17,7 +17,7 @@ const Home: NextPage = () => {
         <Stack gap={5}>
           <Button variant="outline-primary">Add</Button>
           <ListGroup>
-              tasks
+            <TaskItem title="Brabor"></TaskItem>
           </ListGroup>
         </Stack>
       </Container>
