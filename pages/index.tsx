@@ -61,7 +61,7 @@ const Home: NextPage = () => {
           <Col>
             <h1>Watch our prices!</h1>
             <p>They don't exist cuz we are 100% open source 🤣</p>
-            <Button href='https://github.com/MateusGurgel'>Show me the source</Button>
+            <Button variant="outline-primary" href='https://github.com/MateusGurgel'>Show me the source</Button>
           </Col>
           <Col>
             <h1>What is a to-do list?</h1>
@@ -70,7 +70,7 @@ const Home: NextPage = () => {
           <Col>
             <h1>Easy to use!</h1>
             <p>You literally have to press just 2 buttons</p>
-            <Button onClick={() => setRegisterModalShow(true)}>Let's get started</Button>
+            <Button variant="outline-primary" onClick={() => setRegisterModalShow(true)}>Let's get started</Button>
           </Col>
         </Row>
 
