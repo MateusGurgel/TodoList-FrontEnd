@@ -1,9 +1,27 @@
+import axios from "axios";
 import type { NextPage } from "next";
+import { useEffect, useState } from "react";
 import { Container, Button, Stack, ListGroup, Badge } from "react-bootstrap";
 import TaskItem from "../components/taskItem";
 import styles from "../styles/Dashboard.module.css";
 
+interface Task {
+  id : number,
+  title : string,
+  description : string,
+}
+
 const Home: NextPage = () => {
+
+  const[tasks, setTasks] = useState<Task[]>([])
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    axios('http://127.0.0.1:3333/tasks/', { headers:{ 'Authorization': `Bearer ${token}` } }).then(response => {
+      setTasks(response.data)
+      console.log(response.data)
+    },)
+  }, [])
 
   return (
     <div>
@@ -18,7 +36,12 @@ const Home: NextPage = () => {
         <Stack gap={5}>
           <Button variant="outline-primary">Add</Button>
           <ListGroup>
-            <TaskItem title="Brabor" body="Brabor" ></TaskItem>
+            {
+              tasks.map((task) => (
+                <TaskItem key={task.id} title={task.title} body={task.description} ></TaskItem>
+              ))
+            }
+
           </ListGroup>
         </Stack>
       </Container>
