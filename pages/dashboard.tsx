@@ -7,24 +7,25 @@ import TaskItem from "../components/taskItem";
 import styles from "../styles/Dashboard.module.css";
 
 interface Task {
-  id : number,
-  title : string,
-  description : string,
+  id: number;
+  title: string;
+  description: string;
+  priority: number;
 }
 
 const Home: NextPage = () => {
-
-
   const [createTaskModalShow, setCreateTaskModalShow] = useState(false);
-  const[tasks, setTasks] = useState<Task[]>([])
+  const [tasks, setTasks] = useState<Task[]>([]);
 
   useEffect(() => {
-    const token = localStorage.getItem('token')
-    axios('http://127.0.0.1:3333/tasks/', { headers:{ 'Authorization': `Bearer ${token}` } }).then(response => {
-      setTasks(response.data)
-      console.log(response.data)
-    },)
-  }, [])
+    const token = localStorage.getItem("token");
+    axios("http://127.0.0.1:3333/tasks/", {
+      headers: { Authorization: `Bearer ${token}` },
+    }).then((response) => {
+      setTasks(response.data);
+      console.log(response.data);
+    });
+  }, []);
 
   return (
     <div>
@@ -42,13 +43,22 @@ const Home: NextPage = () => {
 
       <Container className={styles.content}>
         <Stack gap={5}>
-          <Button variant="outline-primary" onClick={() => setCreateTaskModalShow(true)}>Add</Button>
+          <Button
+            variant="outline-primary"
+            onClick={() => setCreateTaskModalShow(true)}
+          >
+            Add
+          </Button>
           <ListGroup>
-            {
-              tasks.map((task) => (
-                <TaskItem key={task.id} title={task.title} body={task.description} ></TaskItem>
-              ))
-            }
+            
+            {tasks.map((task) => (
+              <TaskItem
+                key={task.id}
+                title={task.title}
+                body={task.description}
+                priority={task.priority}
+              ></TaskItem>
+            ))}
 
           </ListGroup>
         </Stack>

@@ -21,7 +21,7 @@ function CreateTaskModal(props: any) {
     const bodyParameters = {
       title: data.name,
       description: data.description,
-      priority: [1],
+      priority: [Number(data.priority)],
     };
 
     const post = await axios
@@ -68,9 +68,9 @@ function CreateTaskModal(props: any) {
           <Form.Group className="mb-3" controlId="priority">
             <Form.Label>Task priority</Form.Label>
             <Form.Select required name="priority">
-              <option value="1">Low</option>
-              <option value="2">Medium</option>
-              <option value="3">High</option>
+              <option value={0}>Low</option>
+              <option value={1}>Medium</option>
+              <option value={2}>High</option>
             </Form.Select>
           </Form.Group>
 

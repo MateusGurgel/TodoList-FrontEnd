@@ -3,11 +3,14 @@ import { Badge, Button, Col, ListGroup, Row } from "react-bootstrap";
 interface props {
   title: string;
   body: string;
+  priority: number;
 }
 
 // green = low      "success"
 // yellow = mid     "warning"
 // red = high       "danger"
+
+const colors = ["success", "warning", "danger"]
 
 function TaskItem(props: props) {
   return (
@@ -20,7 +23,7 @@ function TaskItem(props: props) {
         <div className="fw-bold">{props.title}</div>
         {props.body}
       </div>
-      <Badge bg="primary" pill>
+      <Badge bg={colors[props.priority]} pill>
         Priority
       </Badge>
     </ListGroup.Item>
