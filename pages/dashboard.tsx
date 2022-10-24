@@ -2,6 +2,7 @@ import axios from "axios";
 import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 import { Container, Button, Stack, ListGroup, Badge } from "react-bootstrap";
+import CreateTaskModal from "../components/createTaskModal";
 import TaskItem from "../components/taskItem";
 import styles from "../styles/Dashboard.module.css";
 
@@ -13,6 +14,8 @@ interface Task {
 
 const Home: NextPage = () => {
 
+
+  const [createTaskModalShow, setCreateTaskModalShow] = useState(false);
   const[tasks, setTasks] = useState<Task[]>([])
 
   useEffect(() => {
@@ -32,9 +35,14 @@ const Home: NextPage = () => {
         <div className={styles.header_right}></div>
       </div>
 
+      <CreateTaskModal
+        show={createTaskModalShow}
+        onHide={() => setCreateTaskModalShow(false)}
+      />
+
       <Container className={styles.content}>
         <Stack gap={5}>
-          <Button variant="outline-primary">Add</Button>
+          <Button variant="outline-primary" onClick={() => setCreateTaskModalShow(true)}>Add</Button>
           <ListGroup>
             {
               tasks.map((task) => (
