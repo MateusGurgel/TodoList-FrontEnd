@@ -1,7 +1,7 @@
 import axios from "axios";
 import { FormEvent, useState } from "react";
 import { Button, Modal, Form, InputGroup, Badge } from "react-bootstrap";
-import Router from 'next/router'
+import Router from "next/router";
 
 function CreateTaskModal(props: any) {
   const [validated, setValidated] = useState(false);
@@ -21,13 +21,13 @@ function CreateTaskModal(props: any) {
     const bodyParameters = {
       title: data.name,
       description: data.description,
-      priority: [ 1 ],
+      priority: [1],
     };
 
     const post = await axios
       .post("http://127.0.0.1:3333/tasks/", bodyParameters, config)
       .then((response) => {
-        Router.reload()
+        Router.reload();
       })
       .catch(function (error) {
         if (error.response) {
@@ -55,22 +55,19 @@ function CreateTaskModal(props: any) {
       </Modal.Header>
       <Modal.Body>
         <Form validated={validated} onSubmit={handleSubmit}>
-
           <Form.Group className="mb-3" controlId="name">
             <Form.Label>First name</Form.Label>
-            <Form.Control 
-            required 
-            name="name"
-            type="text" 
-            placeholder="Task name" />
+            <Form.Control
+              required
+              name="name"
+              type="text"
+              placeholder="Task name"
+            />
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="priority">
-            <Form.Label>taskPriority</Form.Label>
-            <Form.Select 
-            required
-            name="priority"
-            >
+            <Form.Label>Task priority</Form.Label>
+            <Form.Select required name="priority">
               <option value="1">Low</option>
               <option value="2">Medium</option>
               <option value="3">High</option>
@@ -78,11 +75,13 @@ function CreateTaskModal(props: any) {
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="description">
-            <Form.Label>Task Description</Form.Label>
+            <Form.Label>Task description</Form.Label>
             <Form.Control
-            name="description" 
-            as="textarea"
-            rows={3} />
+              name="description"
+              maxLength={1000}
+              as="textarea"
+              rows={3}
+            />
           </Form.Group>
 
           <Button type="submit">Add</Button>
