@@ -1,10 +1,10 @@
 .header {
   padding: 1em;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.19) ;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.19);
   overflow: hidden;
   background: white;
-  font-family: 'Inter', sans-serif;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Inter", sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 .header a.logo {
@@ -18,10 +18,9 @@
   color: black;
   text-align: center;
   text-decoration: none;
-  font-size: 20px; 
+  font-size: 20px;
   border-radius: 4px;
   padding: 12px;
-  
 }
 
 .header a:hover {
@@ -41,7 +40,7 @@
   font-size: 17px;
   text-align: center;
   background: white;
-  
+
   //height: 100vh;
 }
 

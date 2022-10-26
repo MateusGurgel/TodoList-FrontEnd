@@ -1,96 +1,94 @@
-import axios from 'axios';
-import { FormEvent, useState } from 'react';
-import { Button, Modal, Form } from 'react-bootstrap'
+import axios from "axios";
+import { FormEvent, useState } from "react";
+import { Button, Modal, Form } from "react-bootstrap";
 
-function RegisterModal (props : any){
+function RegisterModal(props: any) {
   const [validated, setValidated] = useState(false);
 
-  const handleSubmit = async (event : FormEvent) => {
-
+  const handleSubmit = async (event: FormEvent) => {
     //placeHolder
 
     event.preventDefault();
 
-    const formData = new FormData(event.target as HTMLFormElement)
-    const data = Object.fromEntries(formData)
+    const formData = new FormData(event.target as HTMLFormElement);
+    const data = Object.fromEntries(formData);
 
-    
-    const post = await axios.post("http://127.0.0.1:3333/users/", {
-
-      "username": data.username,
-      "email": data.email,
-      "password": data.password,
-    }).then(()=>{
-
-      alert("your account has been successfully created!")
-    }).catch(function (error) {
-      if (error.response) {
-
-        alert(error.response.data.errors[0].field + ' ' + error.response.data.errors[0].message);
-      } else if (error.request) {
-
-        alert("Conection Error")
-        console.log(error.request);
-      } else {
-        
-        console.log('Error', error.message);
-      }
-      console.log(error.config);
-    })
-
-    
-
+    const post = await axios
+      .post("http://127.0.0.1:3333/users/", {
+        username: data.username,
+        email: data.email,
+        password: data.password,
+      })
+      .then(() => {
+        alert("your account has been successfully created!");
+      })
+      .catch(function (error) {
+        if (error.response) {
+          alert(
+            error.response.data.errors[0].field +
+              " " +
+              error.response.data.errors[0].message
+          );
+        } else if (error.request) {
+          alert("Conection Error");
+          console.log(error.request);
+        } else {
+          console.log("Error", error.message);
+        }
+        console.log(error.config);
+      });
   };
 
-    return (
-      <Modal
-        {...props}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Register now
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form validated={validated} onSubmit={handleSubmit}>
-
-            <Form.Group className="mb-3" controlId="email">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control
-                required
-                name='email'
-                type="email" 
-                placeholder="email@example.com" />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="username">
-              <Form.Label>Username</Form.Label>
-              <Form.Control 
+  return (
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Register now
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Form validated={validated} onSubmit={handleSubmit}>
+          <Form.Group className="mb-3" controlId="email">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control
               required
-              name='username'
+              name="email"
+              type="email"
+              placeholder="email@example.com"
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="username">
+            <Form.Label>Username</Form.Label>
+            <Form.Control
+              required
+              name="username"
               type="text"
-              placeholder="Username" />
-            </Form.Group>
+              placeholder="Username"
+            />
+          </Form.Group>
 
-            <Form.Group className="mb-3" controlId="password">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                required
-                type="password"
-                name="password"
-                pattern="().{8,}"
-                placeholder="Password (Minimum 8 characters)" />
-            </Form.Group>
-            
-              <Button type="submit">Register</Button>
+          <Form.Group className="mb-3" controlId="password">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              required
+              type="password"
+              name="password"
+              pattern="().{8,}"
+              placeholder="Password (Minimum 8 characters)"
+            />
+          </Form.Group>
 
-          </Form>
-        </Modal.Body>
-      </Modal>
-    );
-  }
+          <Button type="submit">Register</Button>
+        </Form>
+      </Modal.Body>
+    </Modal>
+  );
+}
 
-  export default RegisterModal
+export default RegisterModal;

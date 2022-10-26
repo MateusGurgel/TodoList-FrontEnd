@@ -4,10 +4,10 @@ interface props {
   title: string;
   body: string;
   priority: number;
-  ClickHandler: (event: React.MouseEvent<HTMLButtonElement>) => void
+  ClickHandler: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const colors = ["success", "warning", "danger"]
+const colors = ["success", "warning", "danger"];
 
 function TaskItem(props: props) {
   return (

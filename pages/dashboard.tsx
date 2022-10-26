@@ -21,7 +21,6 @@ const Home: NextPage = () => {
   const [createTaskModalShow, setCreateTaskModalShow] = useState(false);
   const [tasks, setTasks] = useState<Task[]>([]);
 
-  
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios("http://127.0.0.1:3333/tasks/", {
@@ -30,7 +29,6 @@ const Home: NextPage = () => {
       setTasks(response.data);
     });
   }, []);
-
 
   return (
     <div>

@@ -1,10 +1,10 @@
 .header {
   padding: 1em;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.19) ;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.19);
   overflow: hidden;
   background: white;
-  font-family: 'Inter', sans-serif;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Inter", sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 .header a.logo {
@@ -18,10 +18,9 @@
   color: black;
   text-align: center;
   text-decoration: none;
-  font-size: 20px; 
+  font-size: 20px;
   border-radius: 4px;
   padding: 12px;
-  
 }
 
 .header a:hover {
@@ -34,19 +33,19 @@
   float: right;
 }
 
-
-.banner{
+.banner {
   font-size: 60px;
   height: 630px;
   width: 100%;
-  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url("../public/BackGround.jpg") no-repeat center;
-  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url("../public/BackGround.jpg") no-repeat center;
+  font-family: "Montserrat", sans-serif;
   text-align: center;
   color: white;
   line-height: 560px;
 }
 
-.content{
+.content {
   width: 100%;
   margin: 1.5em auto;
   padding: 20px;
@@ -54,7 +53,6 @@
   font-size: 15px;
   text-align: center;
 }
-
 
 @media (prefers-color-scheme: dark) {
 }
