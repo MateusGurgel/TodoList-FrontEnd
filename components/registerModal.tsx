@@ -70,6 +70,8 @@ function RegisterModal(props: any) {
               name="username"
               type="text"
               placeholder="Username"
+              minLength={6}
+              maxLength={30}
             />
           </Form.Group>
 
@@ -79,7 +81,8 @@ function RegisterModal(props: any) {
               required
               type="password"
               name="password"
-              pattern="().{8,}"
+              minLength={8}
+              maxLength={32}
               placeholder="Password (Minimum 8 characters)"
             />
           </Form.Group>

@@ -112,6 +112,7 @@ function ShowTaskModal(props: props) {
               disabled={!editMode}
               name="name"
               type="text"
+              maxLength={50}
               defaultValue={taskTitle}
             />
           </Form.Group>

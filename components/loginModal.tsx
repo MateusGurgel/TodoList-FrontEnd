@@ -47,6 +47,7 @@ function LoginModal(props: any) {
       </Modal.Header>
       <Modal.Body>
         <Form validated={validated} onSubmit={handleSubmit}>
+          
           <Form.Group className="mb-3" controlId="email">
             <Form.Label>Email address</Form.Label>
             <Form.Control
@@ -63,7 +64,8 @@ function LoginModal(props: any) {
               required
               type="password"
               name="password"
-              pattern="().{8,}"
+              minLength={8}
+              maxLength={32}
               placeholder="Password (Minimum 8 characters)"
             />
           </Form.Group>

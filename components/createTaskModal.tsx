@@ -62,6 +62,7 @@ function CreateTaskModal(props: any) {
               name="name"
               type="text"
               placeholder="Task name"
+              maxLength={50}
             />
           </Form.Group>
 
