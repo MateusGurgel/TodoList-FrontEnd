@@ -47,7 +47,6 @@ function LoginModal(props: any) {
       </Modal.Header>
       <Modal.Body>
         <Form validated={validated} onSubmit={handleSubmit}>
-          
           <Form.Group className="mb-3" controlId="email">
             <Form.Label>Email address</Form.Label>
             <Form.Control

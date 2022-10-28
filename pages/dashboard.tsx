@@ -22,7 +22,13 @@ const Home: NextPage = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
 
   useEffect(() => {
+    
     const token = localStorage.getItem("token");
+
+    if (token === null){
+      document.location.href = "../";
+    }
+
     axios("http://127.0.0.1:3333/tasks/", {
       headers: { Authorization: `Bearer ${token}` },
     }).then((response) => {
