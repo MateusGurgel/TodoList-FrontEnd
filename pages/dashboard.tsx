@@ -12,6 +12,7 @@ interface Task {
   title: string;
   description: string;
   priority: number;
+  done: boolean;
 }
 
 const Home: NextPage = () => {
@@ -71,6 +72,8 @@ const Home: NextPage = () => {
                 title={task.title}
                 body={task.description}
                 priority={task.priority}
+                done={task.done}
+                id={task.id}
                 EditClickHandler={() => {
                   setSelectedTaskId(task.id);
                   setShowTaskModalShow(true);
