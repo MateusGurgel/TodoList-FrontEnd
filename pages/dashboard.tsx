@@ -71,7 +71,7 @@ const Home: NextPage = () => {
                 title={task.title}
                 body={task.description}
                 priority={task.priority}
-                ClickHandler={() => {
+                EditClickHandler={() => {
                   setSelectedTaskId(task.id);
                   setShowTaskModalShow(true);
                 }}
