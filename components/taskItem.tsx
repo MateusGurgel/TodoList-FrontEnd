@@ -15,7 +15,8 @@ interface props {
 const colors = ["success", "warning", "danger"];
 
 function TaskItem(props: props) {
-  const handleTaskChangeState = async (props: props) => {
+
+  const handleChangeState = async (props: props) => {
     const token = localStorage.getItem("token");
 
     const config = {
@@ -61,10 +62,14 @@ function TaskItem(props: props) {
           variant="outline-primary"
           checked={props.done}
           value="1"
-          onClick={() => handleTaskChangeState(props)}
+          onClick={() => handleChangeState(props)}
         >
           Done
         </ToggleButton>
+          
+        <Button variant="outline-danger">
+          Delete
+        </Button>
 
         <Button variant="outline-primary" onClick={props.EditClickHandler}>
           <BsPen />
