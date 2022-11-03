@@ -1,8 +1,7 @@
-import { Button, ListGroup, ToggleButton } from "react-bootstrap";
+import { Button, ListGroup, Stack, ToggleButton } from "react-bootstrap";
 import { BsPen } from "react-icons/bs";
 import axios from "axios";
 import Router from "next/router";
-
 
 interface props {
   title: string;
@@ -16,9 +15,7 @@ interface props {
 const colors = ["success", "warning", "danger"];
 
 function TaskItem(props: props) {
-
   const handleTaskChangeState = async (props: props) => {
-    
     const token = localStorage.getItem("token");
 
     const config = {
@@ -30,11 +27,7 @@ function TaskItem(props: props) {
     };
 
     const put = await axios
-      .put(
-        `http://127.0.0.1:3333/tasks/${props.id}`,
-        bodyParameters,
-        config
-      )
+      .put(`http://127.0.0.1:3333/tasks/${props.id}`, bodyParameters, config)
       .then((response) => {
         Router.reload();
       })
@@ -61,8 +54,7 @@ function TaskItem(props: props) {
         {props.body}
       </div>
 
-      <div>
-
+      <Stack direction="horizontal" gap={2}>
         <ToggleButton
           id="toggle-check"
           type="checkbox"
@@ -77,7 +69,7 @@ function TaskItem(props: props) {
         <Button variant="outline-primary" onClick={props.EditClickHandler}>
           <BsPen />
         </Button>
-      </div>
+      </Stack>
     </ListGroup.Item>
   );
 }
