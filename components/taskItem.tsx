@@ -69,16 +69,6 @@ function TaskItem(props: props) {
         >
            { props.done ? <BsCheckSquareFill color="#0d6efd" size={25}/> : <BsSquare color="gray" size={25}/>} 
         </Button>
-
-        <ToggleButton
-          id="toggle-check"
-          type="checkbox"
-          variant="outline-primary"
-          checked={props.done}
-          value="1"
-        >
-          Done
-        </ToggleButton>
       
         <Button variant="outline-primary" onClick={props.EditClickHandler}>
           <BsPen />
