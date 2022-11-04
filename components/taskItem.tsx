@@ -1,5 +1,5 @@
 import { Button, ListGroup, Stack, ToggleButton } from "react-bootstrap";
-import { BsPen } from "react-icons/bs";
+import { BsPen, BsFillFlagFill } from "react-icons/bs";
 import axios from "axios";
 import Router from "next/router";
 
@@ -12,7 +12,7 @@ interface props {
   EditClickHandler: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const colors = ["success", "warning", "danger"];
+const priorityColors = ["#007a00", "#ffc107", "#dc3545"];
 
 function TaskItem(props: props) {
   const handleTaskChangeState = async (props: props) => {
@@ -55,6 +55,12 @@ function TaskItem(props: props) {
       </div>
 
       <Stack direction="horizontal" gap={2}>
+        
+        <div className="m-3">
+          <BsFillFlagFill color={priorityColors[props.priority]} size={20} />
+        </div>
+
+        
         <ToggleButton
           id="toggle-check"
           type="checkbox"
@@ -65,6 +71,7 @@ function TaskItem(props: props) {
         >
           Done
         </ToggleButton>
+
 
         <Button variant="outline-primary" onClick={props.EditClickHandler}>
           <BsPen />
