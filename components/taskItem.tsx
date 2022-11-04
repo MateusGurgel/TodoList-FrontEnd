@@ -70,7 +70,7 @@ function TaskItem(props: props) {
            { props.done ? <BsCheckSquareFill color="#0d6efd" size={25}/> : <BsSquare color="gray" size={25}/>} 
         </Button>
       
-        <Button variant="outline-primary" onClick={props.EditClickHandler}>
+        <Button variant="outline-secundary" onClick={props.EditClickHandler}>
           <BsPen />
         </Button>
       </Stack>

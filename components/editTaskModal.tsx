@@ -178,6 +178,7 @@ function EditTaskModal(props: props) {
 
           <Button
             disabled={!editMode}
+            variant="outline-primary"
             style={{ float: "right" }}
             type={"submit"}
           >
