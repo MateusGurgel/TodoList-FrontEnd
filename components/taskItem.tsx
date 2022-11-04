@@ -16,32 +16,6 @@ const priorityColors = ["#007a00", "#ffc107", "#dc3545"];
 
 function TaskItem(props: props) {
 
-  const handleDelete = async(taskId: number) => {
-    const token = localStorage.getItem("token");
-
-    const config = {
-      headers: { Authorization: `Bearer ${token}` },
-    };
-
-
-    const put = await axios
-      .delete(`http://127.0.0.1:3333/tasks/${props.id}`, config)
-      .then((response) => {
-        Router.reload();
-      })
-      .catch(function (error) {
-        if (error.response) {
-          alert(error.response.data.message);
-        } else if (error.request) {
-          alert("Conection Error");
-          console.log(error.request);
-        } else {
-          console.log("Error", error.message);
-        }
-        console.log(error.config);
-      })
-  }
-
   const handleChangeState = async (props: props) => {
     const token = localStorage.getItem("token");
 
@@ -98,12 +72,7 @@ function TaskItem(props: props) {
         >
           Done
         </ToggleButton>
-          
-        <Button variant="outline-danger" onClick={() => handleDelete(props.id)}>
-          Delete
-        </Button>
-
-
+      
         <Button variant="outline-primary" onClick={props.EditClickHandler}>
           <BsPen />
         </Button>

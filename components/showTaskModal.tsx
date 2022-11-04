@@ -35,6 +35,31 @@ function ShowTaskModal(props: props) {
     });
   }, [props.show, props.taskId]);
 
+  const handleDelete = async (taskId: number) => {
+    const token = localStorage.getItem("token");
+
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+
+    const deleteRequest = await axios
+      .delete(`http://127.0.0.1:3333/tasks/${taskId}`, config)
+      .then((response) => {
+        Router.reload();
+      })
+      .catch(function (error) {
+        if (error.response) {
+          alert(error.response.data.message);
+        } else if (error.request) {
+          alert("Conection Error");
+          console.log(error.request);
+        } else {
+          console.log("Error", error.message);
+        }
+        console.log(error.config);
+      });
+  };
+
   function resetModalInformation() {
     setTaskTitle("");
     setTaskDescription("");
@@ -153,11 +178,22 @@ function ShowTaskModal(props: props) {
 
           <Button
             disabled={!editMode}
-            style={{ margin: "10px" }}
+            style={{ float: "right" }}
             type={"submit"}
           >
             Save
           </Button>
+
+          <Button
+            disabled={editMode}
+            variant="outline-danger"
+            style={{ float: "right", margin: "0px 5px" }}
+
+            onClick={() => handleDelete(props.taskId)}
+          >
+            Delete
+          </Button>
+
         </Form>
       </Modal.Body>
     </Modal>
