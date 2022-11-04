@@ -1,5 +1,5 @@
 import { Button, ListGroup, Stack, ToggleButton } from "react-bootstrap";
-import { BsPen, BsFillFlagFill } from "react-icons/bs";
+import { BsPen, BsFillFlagFill, BsCheckSquare, BsSquare, BsCheckSquareFill } from "react-icons/bs";
 import axios from "axios";
 import Router from "next/router";
 
@@ -62,13 +62,20 @@ function TaskItem(props: props) {
         </div>
 
         
+        <Button
+        variant="outline-secundary"
+        
+        onClick={() => handleChangeState(props)}
+        >
+           { props.done ? <BsCheckSquareFill color="#0d6efd" size={25}/> : <BsSquare color="gray" size={25}/>} 
+        </Button>
+
         <ToggleButton
           id="toggle-check"
           type="checkbox"
           variant="outline-primary"
           checked={props.done}
           value="1"
-          onClick={() => handleChangeState(props)}
         >
           Done
         </ToggleButton>
