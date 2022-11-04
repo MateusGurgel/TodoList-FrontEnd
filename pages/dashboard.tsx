@@ -3,7 +3,7 @@ import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 import { Container, Button, Stack, ListGroup, Badge } from "react-bootstrap";
 import CreateTaskModal from "../components/createTaskModal";
-import ShowTaskModal from "../components/showTaskModal";
+import EditTaskModal from "../components/editTaskModal";
 import TaskItem from "../components/taskItem";
 import styles from "../styles/Dashboard.module.css";
 
@@ -51,7 +51,7 @@ const Home: NextPage = () => {
         onHide={() => setCreateTaskModalShow(false)}
       />
 
-      <ShowTaskModal
+      <EditTaskModal
         show={showTaskModalShow}
         onHide={() => setShowTaskModalShow(false)}
         taskId={selectedTaskId}

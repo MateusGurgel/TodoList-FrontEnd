@@ -9,7 +9,7 @@ interface props {
   taskId: number;
 }
 
-function ShowTaskModal(props: props) {
+function EditTaskModal(props: props) {
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
   const [taskPriority, setTaskPriority] = useState(0);
@@ -200,4 +200,4 @@ function ShowTaskModal(props: props) {
   );
 }
 
-export default ShowTaskModal;
+export default EditTaskModal;
