@@ -4,7 +4,7 @@ import { Button, Modal, Form } from "react-bootstrap";
 
 function RegisterModal(props: any) {
   const [validated, setValidated] = useState(false);
-  const [feedBackMessage, setFeedBackMessage] = useState("  ");
+  const [feedBackMessage, setFeedBackMessage] = useState("");
 
   const handleSubmit = async (event: FormEvent) => {
     //placeHolder

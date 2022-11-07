@@ -1,10 +1,10 @@
-import { AsyncLocalStorage } from "async_hooks";
-import axios from "axios";
 import { FormEvent, useState } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
+import axios from "axios";
 
 function LoginModal(props: any) {
   const [validated, setValidated] = useState(false);
+  const [feedBackMessage, setFeedBackMessage] = useState("");
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -18,13 +18,14 @@ function LoginModal(props: any) {
         password: data.password,
       })
       .then((response) => {
-        console.log(response);
+        setFeedBackMessage("");
         localStorage.setItem("token", response.data.token);
         document.location.href = "dashboard";
       })
       .catch(function (error) {
         if (error.response) {
-          alert(error.response.data.message);
+          console.log(error)
+          setFeedBackMessage(error.response.data.errors[0].message);
         } else if (error.request) {
           alert("Conection Error");
           console.log(error.request);
@@ -68,6 +69,8 @@ function LoginModal(props: any) {
               placeholder="Password (Minimum 8 characters)"
             />
           </Form.Group>
+          
+          <p style={{ color: "red" }}> {feedBackMessage} </p>
 
           <Button type="submit">Login</Button>
         </Form>
