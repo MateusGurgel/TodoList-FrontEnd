@@ -4,6 +4,7 @@ import { Button, Modal, Form } from "react-bootstrap";
 
 function RegisterModal(props: any) {
   const [validated, setValidated] = useState(false);
+  const [feedBackMessage, setFeedBackMessage] = useState("  ");
 
   const handleSubmit = async (event: FormEvent) => {
     //placeHolder
@@ -20,15 +21,12 @@ function RegisterModal(props: any) {
         password: data.password,
       })
       .then(() => {
-        alert("your account has been successfully created!");
+        setFeedBackMessage("");
+        props.onHide();
       })
       .catch(function (error) {
         if (error.response) {
-          alert(
-            error.response.data.errors[0].field +
-              " " +
-              error.response.data.errors[0].message
-          );
+          setFeedBackMessage(error.response.data.errors[0].message);
         } else if (error.request) {
           alert("Conection Error");
           console.log(error.request);
@@ -86,6 +84,8 @@ function RegisterModal(props: any) {
               placeholder="Password (Minimum 8 characters)"
             />
           </Form.Group>
+
+          <p style={{ color: "red" }}> {feedBackMessage} </p>
 
           <Button type="submit">Register</Button>
         </Form>
