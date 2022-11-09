@@ -9,7 +9,6 @@ interface Props {
 }
 
 function CreateTaskModal(props: Props) {
-  const [validated, setValidated] = useState(false);
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -32,7 +31,7 @@ function CreateTaskModal(props: Props) {
     const post = await axios
       .post("http://127.0.0.1:3333/tasks/", bodyParameters, config)
       .then((response) => {
-        Router.reload();
+        props.onHide();
       })
       .catch(function (error) {
         if (error.response) {
@@ -59,7 +58,7 @@ function CreateTaskModal(props: Props) {
         <Modal.Title id="contained-modal-title-vcenter">Add task</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form validated={validated} onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="name">
             <Form.Label>First name</Form.Label>
             <Form.Control
