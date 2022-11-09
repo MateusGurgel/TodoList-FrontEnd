@@ -3,37 +3,56 @@ import { FormEvent, useEffect, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import Router from "next/router";
 
-interface props {
+interface Props {
   show: boolean;
   onHide: () => void;
   taskId: number;
 }
 
-function EditTaskModal(props: props) {
-  const [taskTitle, setTaskTitle] = useState("");
-  const [taskDescription, setTaskDescription] = useState("");
-  const [taskPriority, setTaskPriority] = useState(0);
-  const [validated, setValidated] = useState(false);
+interface Task{
+  title: string;
+  description: string;
+  priority: number;
+}
 
+function EditTaskModal(props: Props) {
   const [editMode, setEditMode] = useState(false);
+  const [task, setTask] = useState<Task>({title: "loading...", description: "loading...", priority: 0});
+  const [isLoading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const taskId = props.taskId;
+  const handleShow = async (taskID: number) => {
+
+    return new Promise<Task>((resolve, reject) => {
+
+      const taskId = props.taskId;
+    const token = localStorage.getItem("token");
 
     if (taskId === 0) {
-      return;
+      reject();
     }
 
-    const token = localStorage.getItem("token");
-    axios(`http://127.0.0.1:3333/tasks/${taskId}`, {
+    const config = {
       headers: { Authorization: `Bearer ${token}` },
-    }).then((response) => {
-      const task = response.data;
-      setTaskTitle(task.title);
-      setTaskDescription(task.description);
-      setTaskPriority(task.priority);
+    };
+
+    axios(`http://127.0.0.1:3333/tasks/${taskId}`, config)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch(function (error) {
+        if (error.response) {
+          console.log(error.response);
+        } else if (error.request) {
+          console.log(error.request);
+        } else {
+          console.log("Error", error.message);
+        }
+        console.log(error.config);
+        reject()
+      });
+
     });
-  }, [props.show, props.taskId]);
+  };
 
   const handleDelete = async (taskId: number) => {
     const token = localStorage.getItem("token");
@@ -45,7 +64,7 @@ function EditTaskModal(props: props) {
     const deleteRequest = await axios
       .delete(`http://127.0.0.1:3333/tasks/${taskId}`, config)
       .then((response) => {
-        Router.reload();
+        props.onHide();
       })
       .catch(function (error) {
         if (error.response) {
@@ -60,14 +79,7 @@ function EditTaskModal(props: props) {
       });
   };
 
-  function resetModalInformation() {
-    setTaskTitle("");
-    setTaskDescription("");
-    setTaskPriority(0);
-    setEditMode(false);
-  }
-
-  const handleSubmit = async (event: FormEvent) => {
+  const handleUpdate = async (event: FormEvent) => {
     event.preventDefault();
 
     const formData = new FormData(event.target as HTMLFormElement);
@@ -107,14 +119,17 @@ function EditTaskModal(props: props) {
       });
   };
 
-  if (!taskTitle) {
-    return null;
-  }
+  useEffect(() => {
+    
+    setLoading(props.show);
 
-  if (!props.show) {
-    resetModalInformation();
-  }
-
+    if (isLoading){
+        handleShow(props.taskId).then((task) => {
+        setTask(task);
+        setLoading(false);
+      })
+    }
+  }, [props.onHide])
   return (
     <Modal
       onHide={props.onHide}
@@ -125,11 +140,11 @@ function EditTaskModal(props: props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          {taskTitle}
+          {isLoading ? 'Loading…' : task.title}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form validated={validated} onSubmit={handleSubmit}>
+        <Form onSubmit={handleUpdate}>
           <Form.Group className="mb-3" controlId="name">
             <Form.Label>Task Name</Form.Label>
             <Form.Control
@@ -138,19 +153,19 @@ function EditTaskModal(props: props) {
               name="name"
               type="text"
               maxLength={50}
-              defaultValue={taskTitle}
+              placeholder={isLoading ? 'Loading…' : task.title}
             />
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="description">
             <Form.Label>Task description</Form.Label>
             <Form.Control
-              defaultValue={taskDescription}
               disabled={!editMode}
               name="description"
               maxLength={1000}
               as="textarea"
               rows={3}
+              placeholder={ isLoading ? 'Loading…' : task.description }
             />
           </Form.Group>
 
@@ -159,7 +174,7 @@ function EditTaskModal(props: props) {
             <Form.Select
               name="priority"
               disabled={!editMode}
-              defaultValue={taskPriority}
+              defaultValue={0}
             >
               <option value={0}>Low</option>
               <option value={1}>Medium</option>
@@ -189,12 +204,10 @@ function EditTaskModal(props: props) {
             disabled={editMode}
             variant="outline-danger"
             style={{ float: "right", margin: "0px 5px" }}
-
             onClick={() => handleDelete(props.taskId)}
           >
             Delete
           </Button>
-
         </Form>
       </Modal.Body>
     </Modal>
