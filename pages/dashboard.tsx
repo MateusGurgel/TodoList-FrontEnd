@@ -16,7 +16,7 @@ interface Task {
 }
 
 const Home: NextPage = () => {
-  const [showTaskModalShow, setShowTaskModalShow] = useState(false);
+  const [editTaskModalShow, setShowTaskModalShow] = useState(false);
   const [selectedTaskId, setSelectedTaskId] = useState(0);
 
   const [createTaskModalShow, setCreateTaskModalShow] = useState(false);
@@ -35,7 +35,7 @@ const Home: NextPage = () => {
     }).then((response) => {
       setTasks(response.data);
     });
-  }, []);
+  }, [editTaskModalShow, createTaskModalShow]);
 
   return (
     <div>
@@ -52,7 +52,7 @@ const Home: NextPage = () => {
       />
 
       <EditTaskModal
-        show={showTaskModalShow}
+        show={editTaskModalShow}
         onHide={() => setShowTaskModalShow(false)}
         taskId={selectedTaskId}
       />
