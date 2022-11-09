@@ -104,7 +104,7 @@ function EditTaskModal(props: Props) {
         config
       )
       .then((response) => {
-        Router.reload();
+        props.onHide()
       })
       .catch(function (error) {
         if (error.response) {
