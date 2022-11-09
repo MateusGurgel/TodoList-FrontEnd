@@ -3,7 +3,12 @@ import { FormEvent, useState } from "react";
 import { Button, Modal, Form, InputGroup, Badge } from "react-bootstrap";
 import Router from "next/router";
 
-function CreateTaskModal(props: any) {
+interface Props {
+  show: boolean;
+  onHide: () => void;
+}
+
+function CreateTaskModal(props: Props) {
   const [validated, setValidated] = useState(false);
 
   const handleSubmit = async (event: FormEvent) => {
