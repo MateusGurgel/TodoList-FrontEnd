@@ -19,12 +19,17 @@ const Home: NextPage = () => {
   const [editTaskModalShow, setShowTaskModalShow] = useState(false);
   const [selectedTaskId, setSelectedTaskId] = useState(0);
 
+  const [reload, setReload] = useState(false)
   const [createTaskModalShow, setCreateTaskModalShow] = useState(false);
   const [tasks, setTasks] = useState<Task[]>([]);
 
   useEffect(() => {
     
     const token = localStorage.getItem("token");
+
+    if (reload){
+      setReload(false);
+    }
 
     if (token === null){
       document.location.href = "../";
@@ -35,7 +40,7 @@ const Home: NextPage = () => {
     }).then((response) => {
       setTasks(response.data);
     });
-  }, [editTaskModalShow, createTaskModalShow]);
+  }, [editTaskModalShow, createTaskModalShow, reload]);
 
   return (
     <div>
@@ -74,6 +79,7 @@ const Home: NextPage = () => {
                 priority={task.priority}
                 done={task.done}
                 id={task.id}
+                reload={setReload}
                 EditClickHandler={() => {
                   setSelectedTaskId(task.id);
                   setShowTaskModalShow(true);
